@@ -1,13 +1,7 @@
 
 import PromptCard from '@components/PromptCard';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 
 const Profile = ({name, desc, data, handleEdit, handleDelete}) => {
-  // Protected Route
-  const {data: session} = useSession()
-  const router = useRouter()
-  if(!session) router.push('/')
   
   return (
     <section className="w-full">
