@@ -36,7 +36,7 @@ const Feed = () => {
 
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [fetchPosts])
 
   return (
     <section className="feed">
