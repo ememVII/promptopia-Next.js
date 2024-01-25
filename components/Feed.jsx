@@ -3,15 +3,19 @@ import { useEffect, useState } from 'react'
 import PromptCard from './PromptCard'
 import { useSession } from 'next-auth/react'
 
-const PromptCardList = ({data, handleTagClick}) => {
+const PromptCardList = ({ data, handleTagClick }) => {
   const { data: session } = useSession()
-  
+
   return (
     <div>
-      <div className='mt-16 prompt_layout'>
-      {data.map((post) => (
-        <PromptCard key={post._id} post={post} handleTagClick={handleTagClick}/>
-      ))}
+      <div className="mt-16 prompt_layout">
+        {data.map(post => (
+          <PromptCard
+            key={post._id}
+            post={post}
+            handleTagClick={handleTagClick}
+          />
+        ))}
       </div>
     </div>
   )
@@ -20,34 +24,32 @@ const PromptCardList = ({data, handleTagClick}) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('')
   const [posts, setPosts] = useState([])
-  
-  const handleTagClick = () => {
-    
+
+  const handleTagClick = () => {}
+
+  const fetchPosts = async () => {
+    const response = await fetch('/api/prompt')
+    const data = await response.json()
+
+    setPosts(data)
   }
-  
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch('/api/prompt')
-      const data = await response.json()
-      
-      setPosts(data)
-    }
-    
     fetchPosts()
   }, [])
-  
+
   return (
-    <section className='feed'>
-      <form className='relative w-full flex-center'>
+    <section className="feed">
+      <form className="relative w-full flex-center">
         <input
-        className='search_input peer'
-        onChange={(e) => setSearchText(e.target.value)}
-        value={searchText}
-        required
-        placeholder='Search for similar tags'
+          className="search_input peer"
+          onChange={e => setSearchText(e.target.value)}
+          value={searchText}
+          required
+          placeholder="Search for similar tags"
         />
       </form>
-      
+
       <PromptCardList data={posts} handleTagClick={handleTagClick} />
     </section>
   )
