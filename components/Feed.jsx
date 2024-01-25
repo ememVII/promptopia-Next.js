@@ -8,11 +8,11 @@ const PromptCardList = ({data, handleTagClick}) => {
   
   return (
     <div>
-      {session ? <div className='mt-16 prompt_layout'>
+      <div className='mt-16 prompt_layout'>
       {data.map((post) => (
         <PromptCard key={post._id} post={post} handleTagClick={handleTagClick}/>
       ))}
-      </div> : <h1 className='mt-16 font-satoshi font-semibold blue_gradient text-xl ring-1 py-3 px-8 rounded-lg'>Sign In to see All Posts</h1>}
+      </div>
     </div>
   )
 }
