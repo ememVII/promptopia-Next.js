@@ -35,7 +35,7 @@ const MyProfile = () => {
             method: 'DELETE'
           })
           
-          const filteredPosts = posts.filter((p) => p._id !== post._id)
+          const filteredPosts = posts.filter((p) => p._id.toString() !== post._id.toString())
           
           setPosts(filteredPosts)
         } catch (error) {
