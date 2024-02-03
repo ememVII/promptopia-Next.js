@@ -25,10 +25,13 @@ const Feed = () => {
   const handleTagClick = () => {}
 
   const fetchPosts = async () => {
-    const response = await fetch('/api/prompt')
-    const data = await response.json()
-
-    setPosts(data)
+    try {
+      const response = await fetch('/api/prompt')
+      const data = await response.json()
+      setPosts(data)
+    } catch (error) {
+      console.error('Failed to fetch posts:', error);
+    }
   }
 
   useEffect(() => {
