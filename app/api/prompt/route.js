@@ -1,14 +1,13 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
 
-export const revalidate = 1; //revalidate api every 1 second
 export const GET = async (request) => {
     try {
         await connectToDB()
         
         const prompts = await Prompt.find({}).populate('creator')
         
-        return new Response(JSON.stringify(prompts), {status: 200})
+        return new Response(JSON.stringify(prompts), {status: 200, revalidate: 1})
     } catch (error) {
         return new Response('Failed to fetch posts', {status: 500})
     }
