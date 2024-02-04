@@ -78,7 +78,7 @@ const Navbar = () => {
                                 My Profile
                             </Link>
                             
-                            <Link href='/create-prompr' className='dropdown_link' onClick={() => setToggleProfile(false)}>
+                            <Link href='/create-prompt' className='dropdown_link' onClick={() => setToggleProfile(false)}>
                                 Create Prompt
                             </Link>
                             
@@ -91,13 +91,14 @@ const Navbar = () => {
                             </button>
                         </div>
                     )}
-            </div> : <>
+            </div> : (<>
             {
-                providers && Object.values(providers).map((provider) => {
+                providers && Object.values(providers).map((provider) => (
                     <button type='button' key={provider.name} onClick={() => signIn(provider.id)} className='black_btn'>Sign In</button>
-                })
+                ))
             }
-            </>}
+            </>)
+            }
         </div>
     </nav>
   )
